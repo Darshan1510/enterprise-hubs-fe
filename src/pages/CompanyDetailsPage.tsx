@@ -6,6 +6,7 @@ import { Company } from "../types/Company";
 import { Location } from "../types/Location";
 import Map from "../components/Map";
 import MultipleMaps from "../components/MultipleMaps";
+import RevenueChart from "../components/RevenueChart";
 
 const CompanyDetailsPage: React.FC = () => {
   const { companyId } = useParams<{ companyId: string }>();
@@ -89,14 +90,11 @@ const CompanyDetailsPage: React.FC = () => {
             <MultipleMaps locations={locations} />
           </div>
         </div>
-        <div
-          className="tab-pane fade"
-          id="clustered-view"
-          role="tabpanel"
-          aria-labelledby="clustered-view-tab"
-        >
-          <div className="m-2"></div>
-        </div>
+      </div>
+      <div className="border p-2 m-2">
+        <h3 className="text-center">Company Revenue:</h3>
+        <hr/>
+        <RevenueChart companyId={Number(companyId)} />
       </div>
     </div>
   );

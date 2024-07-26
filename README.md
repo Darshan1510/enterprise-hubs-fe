@@ -111,7 +111,3 @@ git clone https://github.com/Darshan1510/enterprise-hubs-be.git
    ```
 
 The frontend will be available at `http://localhost:3000`, and the backend API will be available at `http://localhost:8000`.
-
-## License
-
-[MIT](LICENSE)

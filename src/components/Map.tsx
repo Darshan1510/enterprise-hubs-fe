@@ -21,7 +21,6 @@ const Map: React.FC<MapProps> = ({ latitude, longitude, locations }) => {
       <MapContainer
         center={[latitude, longitude]}
         zoom={3}
-        scrollWheelZoom={false}
         style={{ height: "500px", width: "100%" }}
         className="leaflet-container"
       >

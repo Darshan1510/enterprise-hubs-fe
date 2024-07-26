@@ -5,7 +5,7 @@ import CompanyDetailsPage from "../pages/CompanyDetailsPage";
 
 const Main: React.FC = () => {
   return (
-    <main className="container flex-grow-1">
+    <main style={{ minHeight: "100vh" }}>
       <Routes>
         <Route path="/" element={<CompanyListPage />} />
         <Route path="/companies/:companyId" element={<CompanyDetailsPage />} />

@@ -5,12 +5,18 @@ import CompanyDetails from "../components/CompanyDetails";
 import { Company } from "../types/Company";
 import { Location } from "../types/Location";
 import Map from "../components/Map";
+import MultipleMaps from "../components/MultipleMaps";
 
 const CompanyDetailsPage: React.FC = () => {
   const { companyId } = useParams<{ companyId: string }>();
   const [company, setCompany] = useState<Company | null>(null);
   const [locations, setLocations] = useState<Location[]>([]);
+  const [activeTab, setActiveTab] = useState<string>("map-view");
   const navigate = useNavigate();
+
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,8 +38,65 @@ const CompanyDetailsPage: React.FC = () => {
         Back to List
       </button>
       <CompanyDetails company={company} locations={locations} />
-      <div className="m-2">
-        <Map latitude={company.latitude} longitude={company.longitude} locations={locations} />
+      <ul className="nav nav-tabs mt-2 text-center" id="mapTab" role="tablist">
+        <li className="nav-item">
+          <a
+            className={`nav-link ${activeTab === "map-view" ? "active" : ""}`}
+            id="map-view-tab"
+            data-toggle="tab"
+            href="#map-view"
+            role="tab"
+            aria-controls="map-view"
+            aria-selected="true"
+            onClick={() => handleTabChange("map-view")}
+          >
+            Map View
+          </a>
+        </li>
+        <li className="nav-item">
+          <a
+            className={`nav-link ${activeTab === "multiple-maps-view" ? "active" : ""}`}
+            id="multiple-maps-view-tab"
+            data-toggle="tab"
+            href="#multiple-maps-view"
+            role="tab"
+            aria-controls="multiple-maps-view"
+            aria-selected="false"
+            onClick={() => handleTabChange("multiple-maps-view")}
+          >
+            Multiple Map View
+          </a>
+        </li>
+      </ul>
+      <div className="tab-content" id="mapTabContent">
+        <div
+          className={`tab-pane fade ${activeTab === "map-view" ? "show active" : ""}`}
+          id="map-view"
+          role="tabpanel"
+          aria-labelledby="map-view-tab"
+        >
+          <div className="m-2">
+            <Map latitude={company.latitude} longitude={company.longitude} locations={locations} />
+          </div>
+        </div>
+        <div
+          className={`tab-pane fade ${activeTab === "multiple-maps-view" ? "show active" : ""}`}
+          id="multiple-maps-view"
+          role="tabpanel"
+          aria-labelledby="multiple-maps-view-tab"
+        >
+          <div className="m-2">
+            <MultipleMaps locations={locations} />
+          </div>
+        </div>
+        <div
+          className="tab-pane fade"
+          id="clustered-view"
+          role="tabpanel"
+          aria-labelledby="clustered-view-tab"
+        >
+          <div className="m-2"></div>
+        </div>
       </div>
     </div>
   );

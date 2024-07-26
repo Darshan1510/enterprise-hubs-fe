@@ -2,13 +2,11 @@ import React, { useState, useEffect } from "react";
 import { companyApi } from "../services";
 import CompanyList from "../components/CompanyList";
 import { Company } from "../types/Company";
-import { useNavigate } from "react-router-dom";
 
 const CompanyListPage: React.FC = () => {
   const [companies, setCompanies] = useState<Company[]>([]);
   const [search, setSearch] = useState<string>("");
   const [view, setView] = useState<string>("list");
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,10 +22,6 @@ const CompanyListPage: React.FC = () => {
     fetchData();
   }, [search]);
 
-  const handleCompanyClick = (companyId: number) => {
-    navigate(`/companies/${companyId}`);
-  };
-
   return (
     <div className="container my-4">
       <div className="search-bar input-group mb-3">
@@ -41,7 +35,7 @@ const CompanyListPage: React.FC = () => {
       </div>
       <div className="d-flex justify-content-end mb-3 view-toggle">
         <button
-          className={`btn btn-outline-primary ${view === "list" ? "active" : ""}`}
+          className={`btn btn-primary ${view === "list" ? "active" : ""}`}
           onClick={() => setView("list")}
         >
           <i className="bi bi-list"></i> List View
@@ -53,8 +47,22 @@ const CompanyListPage: React.FC = () => {
         >
           <i className="bi bi-grid"></i> Grid View
         </button>
+        &nbsp;
+        <button
+          className={`btn btn-info ml-2 text-white ${view === "map" ? "active" : ""}`}
+          onClick={() => setView("map")}
+        >
+          <i className="bi bi-map"></i> Map View
+        </button>
+        &nbsp;
+        <button
+          className={`btn btn-outline-warning ml-2 ${view === "all-locations" ? "active" : ""}`}
+          onClick={() => setView("all-locations")}
+        >
+          <i className="bi bi-map"></i> All locations
+        </button>
       </div>
-      <CompanyList companies={companies} onCompanyClick={handleCompanyClick} view={view} />
+      <CompanyList companies={companies} view={view} />
     </div>
   );
 };

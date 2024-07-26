@@ -8,17 +8,17 @@ import { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { Link } from "react-router-dom";
 
-const AllLocationsMap: React.FC = () => {
+interface AllLocationsMapProps {
+  companies: Company[];
+}
+
+const AllLocationsMap: React.FC<AllLocationsMapProps> = ({ companies }) => {
   const [locations, setLocations] = useState<Location[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [companies, setCompanies] = useState<Company[]>([]);
 
   useEffect(() => {
     const fetchAllLocations = async () => {
       try {
-        // Fetch all companies
-        const companies: Company[] = await companyApi.getCompanies();
-
         // Fetch locations for each company
         const allLocations: Location[] = [];
         for (const company of companies) {
@@ -27,7 +27,6 @@ const AllLocationsMap: React.FC = () => {
         }
 
         setLocations(allLocations);
-        setCompanies(companies);
       } catch (error) {
         console.error("Failed to fetch locations:", error);
       } finally {
@@ -36,7 +35,7 @@ const AllLocationsMap: React.FC = () => {
     };
 
     fetchAllLocations();
-  }, []);
+  }, [companies]);
 
   if (loading) {
     return <div>Loading...</div>;

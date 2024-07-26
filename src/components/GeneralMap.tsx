@@ -4,6 +4,7 @@ import { Company } from "../types/Company";
 import markerIconPng from "leaflet/dist/images/marker-icon.png";
 import { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { Link } from "react-router-dom";
 
 interface MapProps {
   companies: Company[];
@@ -33,7 +34,10 @@ const GeneralMap: React.FC<MapProps> = ({ companies }) => {
             icon={new Icon({ iconUrl: markerIconPng, iconSize: [25, 41], iconAnchor: [12, 41] })}
           >
             <Popup>
-              {company.name} - {company.address}
+              <Link to={`/companies/${company.company_id}`} className="text-decoration-none">
+                <b>{company.name}</b>
+              </Link>
+              <br /> {company.address}
             </Popup>
           </Marker>
         ))}

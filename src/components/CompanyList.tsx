@@ -54,7 +54,7 @@ const CompanyList: React.FC<CompanyListProps> = ({ companies, view }) => {
       case "all-locations":
         return (
           <div className="m-2">
-            <AllLocationsMap />
+            <AllLocationsMap companies={companies} />
           </div>
         );
       default:

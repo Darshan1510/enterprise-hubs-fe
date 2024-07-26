@@ -38,21 +38,21 @@ const CompanyListPage: React.FC = () => {
           className={`btn btn-primary ${view === "list" ? "active" : ""}`}
           onClick={() => setView("list")}
         >
-          <i className="bi bi-list"></i> List View
+          <i className="bi bi-list"></i> List
         </button>
         &nbsp;
         <button
           className={`btn btn-outline-primary ml-2 ${view === "grid" ? "active" : ""}`}
           onClick={() => setView("grid")}
         >
-          <i className="bi bi-grid"></i> Grid View
+          <i className="bi bi-grid"></i> Grid
         </button>
         &nbsp;
         <button
           className={`btn btn-info ml-2 text-white ${view === "map" ? "active" : ""}`}
           onClick={() => setView("map")}
         >
-          <i className="bi bi-map"></i> Map View
+          <i className="bi bi-map"></i> Map
         </button>
         &nbsp;
         <button
